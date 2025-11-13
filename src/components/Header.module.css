@@ -1,0 +1,148 @@
+.headerWrapper {
+  position: relative;
+}
+
+/* DESKTOP HEADER */
+.headerDesktop {
+  /* Temporarily use fixed positioning to avoid ancestor stacking/overflow
+     issues while we diagnose the sticky behaviour. This is reversible. */
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999; /* raised for testing to ensure visibility */
+  width: 90%;
+  margin: 0.5rem 0; /* keep vertical spacing similar to previous layout */
+  padding: 0.5rem 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.9);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  will-change: opacity, transform;
+}
+
+/* MOBILE HEADER */
+.mobileHeader {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  will-change: opacity, transform;
+}
+
+/* TEMPORARY ABSOLUTE POSITION DURING TRANSITION */
+.transitioning {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+/* VISIBILITY STATES */
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hidden {
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  display: none !important; /* Ensures only one participates in layout */
+}
+
+/* SMOOTH FADE/SLIDE ANIMATIONS */
+.fadeInDown {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.fadeOutUp {
+  opacity: 0 !important;
+  transform: translateY(-20px) !important;
+}
+
+/* EXISTING STYLES BELOW (unchanged) */
+.brand {
+  font-family: 'Lora', serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--foreground);
+}
+
+.navList {
+  gap: 1rem;
+  align-items: center;
+}
+
+.navLink {
+  color: #4b5563;
+  text-decoration: none;
+  transition: color 200ms ease-in-out;
+}
+
+.navLink:hover {
+  color: var(--foreground);
+  transform: translateY(-2px);
+}
+
+.iconLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  color: #4b5563;
+  transition: color 200ms ease-in-out, transform 150ms ease;
+}
+
+.iconLink:hover {
+  color: var(--foreground);
+  transform: translateY(-2px);
+}
+
+/* (Optional: Keep these keyframes for other animations if used elsewhere) */
+@keyframes slideInDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOutUp {
+  from {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+.slideInDown {
+  animation: slideInDown 350ms ease forwards;
+}
+
+.slideOutUp {
+  animation: slideOutUp 350ms ease forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .slideInDown,
+  .slideOutUp {
+    animation: none !important;
+  }
+}

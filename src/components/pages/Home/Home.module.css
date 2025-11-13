@@ -1,0 +1,108 @@
+:root {
+  --grid-size: 32px;
+  /* square size */
+  --line-thickness: 1px;
+  /* line thickness */
+  --line-color: rgba(0, 0, 0, 0.1);
+}
+
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --line-color: rgba(255, 255, 255, 0.125);
+
+  }
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.grid {
+  height: 100%;
+  background-image:
+    /* vertical lines */
+    repeating-linear-gradient(to right,
+      var(--line-color) 0,
+      var(--line-color) var(--line-thickness),
+      transparent var(--line-thickness),
+      transparent var(--grid-size)),
+    /* horizontal lines */
+    repeating-linear-gradient(to bottom,
+      var(--line-color) 0,
+      var(--line-color) var(--line-thickness),
+      transparent var(--line-thickness),
+      transparent var(--grid-size));
+}
+
+/* per-word slide-in animation for tagline */
+.word {
+  display: inline-block;
+  transform: translateY(12px) scale(0.98);
+  opacity: 0;
+  animation-name: slideInUp;
+  animation-duration: 560ms;
+  animation-fill-mode: both;
+  /* allow stagger via --i (0,1,2...) */
+  animation-delay: calc(var(--i, 0) * 140ms);
+  will-change: transform, opacity;
+}
+
+/* make sure the carousel area doesn't push tagline off-screen on small devices */
+.carousel-wrapper {
+  width: 100%;
+  max-height: 55vh;
+  /* keep some space for tagline */
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+  .carousel-wrapper {
+    max-height: 65vh;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    transform: translateY(12px) scale(0.98);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .word {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  position: absolute;
+  content: "";
+  width: 520px;
+  background: radial-gradient(circle at center, rgba(0, 255, 255, 0.4), transparent 70%);
+  background-size: cover;
+  opacity: 0.4;
+  border-radius: 100%;
+  aspect-ratio: 1 / 1;
+  z-index: 50;
+}
+
+@media (prefers-color-scheme: dark) {
+  .hero::after {
+    background: radial-gradient(circle at center, rgba(98, 65, 195, 0.4), transparent 70%);
+  }
+}
