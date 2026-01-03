@@ -98,6 +98,7 @@ body {
   opacity: 0.4;
   border-radius: 100%;
   aspect-ratio: 1 / 1;
+  pointer-events: none;
   z-index: 50;
 }
 

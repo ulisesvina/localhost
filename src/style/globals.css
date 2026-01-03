@@ -169,3 +169,34 @@ body {
  }
 }
 
+/* Carousel slide-in animations */
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(40%) scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0%) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-40%) scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0%) scale(1);
+    opacity: 1;
+  }
+}
+
+.carousel-slide-in-right {
+  animation: slideInFromRight 700ms cubic-bezier(.2,.9,.2,1) both;
+}
+
+.carousel-slide-in-left {
+  animation: slideInFromLeft 700ms cubic-bezier(.2,.9,.2,1) both;
+}
+

@@ -1,0 +1,68 @@
+{
+  "navigation": {
+    "about": "About",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hello, I'm Ulises 👋",
+    "description": "I craft beautiful, functional digital experiences with modern technologies.",
+    "resumeButton": "Check my Resume",
+    "word1": "DISTINCT",
+    "word2": "by",
+    "word3": "design"
+  },
+  "techStack": {
+    "label": "Tech Stack",
+    "skills": [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "UI/UX Design",
+      "Responsive Design"
+    ]
+  },
+  "about": {
+    "title": "About",
+    "subtitle": "I specialize in building digital experiences that merge stunning design with robust engineering.",
+    "cards": {
+      "interactive": {
+        "title": "Interactive",
+        "description": "I prioritize user engagement through intuitive interfaces and seamless interactions."
+      },
+      "design": {
+        "title": "Design",
+        "description": "My designs focus on clarity, aesthetics, and user-centric principles to create memorable experiences."
+      },
+      "responsiveness": {
+        "title": "Responsiveness",
+        "description": "I ensure that every project is optimized for performance and accessibility across all devices."
+      }
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "A selection of work that showcases my approach to design and development.",
+    "projectDescription": "Innovative web experience combining design excellence with technical precision.",
+    "badges": {
+      "design": "Design",
+      "development": "Development"
+    }
+  },
+  "contact": {
+    "title": "Let's talk",
+    "subtitle": "Got an idea or opportunity? I'd love to hear from you.",
+    "emailButton": "Send Email",
+    "resumeButton": "View Resume",
+    "findMeLabel": "Or find me on",
+    "socials": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "twitter": "Twitter"
+    }
+  },
+  "mobileMenu": {
+    "languageToggle": "Language"
+  }
+}

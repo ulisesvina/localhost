@@ -2,6 +2,7 @@
 import Image from "next/image"
 import { useEffect, useRef, useState } from "react"
 import { ChevronLeft, ChevronRight, X } from "lucide-react"
+import Link from "next/link"
 
 type CarouselProps = {
     images: string[]
@@ -18,13 +19,38 @@ export default function Carousel({
     autoPlayInterval = 2000,
     onIndexChange,
 }: CarouselProps) {
-    const [index, setIndex] = useState(0)
-    const [isModalOpen, setIsModalOpen] = useState(false)
-    const [modalIndex, setModalIndex] = useState<number | null>(null)
-    const timeoutRef = useRef<number | null>(null)
-    const rootRef = useRef<HTMLDivElement | null>(null)
-    const closeButtonRef = useRef<HTMLButtonElement | null>(null)
-    const isHoveringRef = useRef(false)
+    const [index, setIndex] = useState(0);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalIndex, setModalIndex] = useState<number | null>(null);
+    const timeoutRef = useRef<number | null>(null);
+    const rootRef = useRef<HTMLDivElement | null>(null);
+    const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+    const isHoveringRef = useRef(false);
+    const prevIndexRef = useRef(0);
+    const [entering, setEntering] = useState<{ i: number; dir: "left" | "right" } | null>(null);
+    const [loaded, setLoaded] = useState<boolean[]>(() =>
+        Array(images.length).fill(false)
+    )
+
+    const projectURLs = new Map<number, string>([
+        [0, "https://chilangohacks.co"],
+        [1, "https://protego247.com"],
+        [2, "https://celuzen.com"],
+        [3, "https://shellyapp.com"],
+    ]);
+
+    projectURLs.set(0, "https://chilangohacks.co")
+    projectURLs.set(1, "https://protego247.com")
+    projectURLs.set(2, "https://celuzen.com")
+    projectURLs.set(3, "https://shellyenterprisesolutions.com")
+
+    const handleLoaded = (i: number) => {
+        setLoaded(prev => {
+            const copy = [...prev]
+            copy[i] = true
+            return copy
+        })
+    }
 
     useEffect(() => {
         onIndexChange?.(index)
@@ -67,6 +93,26 @@ export default function Carousel({
         window.addEventListener("keydown", onKey)
         return () => window.removeEventListener("keydown", onKey)
     }, [images.length])
+
+    // track previous index to determine slide direction and trigger a slide-in animation
+    useEffect(() => {
+        const prev = prevIndexRef.current
+        if (prev === index) return
+        if (images.length <= 1) {
+            prevIndexRef.current = index
+            return
+        }
+
+        // determine direction: next (from right) or prev (from left)
+        const nextIndex = (prev + 1) % images.length
+        const dir: "left" | "right" = index === nextIndex ? "right" : "left"
+
+        setEntering({ i: index, dir })
+        const t = window.setTimeout(() => setEntering(null), 700)
+        prevIndexRef.current = index
+
+        return () => window.clearTimeout(t)
+    }, [index, images.length])
 
     // Modal-specific keyboard navigation (left/right to change images)
     useEffect(() => {
@@ -114,6 +160,29 @@ export default function Carousel({
             el.removeEventListener("touchend", onTouchEnd)
         }
     }, [images.length])
+
+    // Preload current + adjacent images (lightweight background preload)
+    useEffect(() => {
+        if (!images || images.length === 0) return
+        const toPreload = new Set<number>()
+        toPreload.add(index)
+        toPreload.add((index + 1) % images.length)
+        toPreload.add((index - 1 + images.length) % images.length)
+
+        const imgs: HTMLImageElement[] = []
+        toPreload.forEach((i) => {
+            const src = images[i]
+            if (!src) return
+            const img = new window.Image()
+            img.src = src
+            imgs.push(img)
+        })
+
+        return () => {
+            // Allow GC by clearing src
+            imgs.forEach((img) => (img.src = ""))
+        }
+    }, [index, images])
 
     const goToPrevious = () => setIndex((i) => (i - 1 + images.length) % images.length)
     const goToNext = () => setIndex((i) => (i + 1) % images.length)
@@ -214,13 +283,27 @@ export default function Carousel({
                                 <div
                                     className={`relative w-[240px] h-[150px] sm:w-[400px] sm:h-[250px] md:w-[600px] md:h-[360px] rounded-lg overflow-hidden flex items-center justify-center transition-all duration-300`}
                                 >
+                                    {!loaded[i] && (
+                                        <div
+                                            className={`
+                                                    absolute inset-0 bg-neutral-800/40 
+                                                    transition-opacity duration-200
+                                                    ${loaded[i] ? "opacity-0 pointer-events-none" : "opacity-100"}
+                                                `}
+                                        />
+                                    )}
+
                                     <Image
                                         src={src || "/placeholder.svg"}
                                         alt={alt[i] ?? `carousel-${i}`}
                                         fill
+                                        onLoad={() => handleLoaded(i)}
                                         sizes="(max-width: 768px) 100vw, 600px"
-                                        className="object-contain"
-                                        priority={Math.abs(i - index) <= 1}
+                                        className={`object-contain transition-opacity duration-300 ${loaded[i] ? "opacity-100" : "opacity-0"
+                                            }`}
+                                        loading={i === index ? "eager" : "lazy"}
+                                        decoding="async"
+                                        priority={i === index}
                                         draggable={false}
                                     />
                                 </div>
@@ -262,14 +345,19 @@ export default function Carousel({
 
                     <div className="relative z-80 max-w-[90vw] max-h-[90vh] w-full flex items-center justify-center">
                         <div className="w-full h-full max-h-[90vh] max-w-5xl px-2">
-                            <div className="relative w-full h-[70vh] md:h-[80vh] bg-black rounded">
-                                <Image
-                                    src={images[modalIndex] || "/placeholder.svg"}
-                                    alt={alt[modalIndex] ?? `carousel-${modalIndex}`}
-                                    fill
-                                    sizes="100vw"
-                                    className="object-contain"
-                                />
+                            <div className="relative w-full h-[70vh] md:h-[80vh] rounded">
+                                <Link href={projectURLs.get(modalIndex) || '#'} target="_blank" rel="noopener noreferrer">
+                                    <Image
+                                        src={images[modalIndex] || "/placeholder.svg"}
+                                        alt={alt[modalIndex] ?? `carousel-${modalIndex}`}
+                                        fill
+                                        sizes="100vw"
+                                        className="object-contain"
+                                        loading="eager"
+                                        decoding="async"
+                                        priority
+                                    />
+                                </Link>
                             </div>
                         </div>
 

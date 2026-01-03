@@ -3,6 +3,7 @@ import { Lora } from "next/font/google";
 import "@/style/globals.css";
 
 import IsMobileProvider from "@/context/ui/isMobile";
+import I18nProvider from "@/i18n/provider";
 
 import Header from "@/components/Header";
 import MobileMenu from "@/components/mobileMenu";
@@ -29,13 +30,15 @@ export default function RootLayout({
       <body
         className={`${lora.variable} antialiased`}
       >
-        <IsMobileProvider>
-          <Header />
-          <MobileMenu />
-          <main className="max-w-screen-lg w-full inset-0 mx-auto px-6 md:px-4 lg:px-8 pt-8">
-            {children}
-          </main>
-        </IsMobileProvider>
+        <I18nProvider>
+          <IsMobileProvider>
+            <Header />
+            <MobileMenu />
+            <main className="max-w-screen-lg w-full inset-0 mx-auto px-6 md:px-4 lg:px-8 pt-8">
+              {children}
+            </main>
+          </IsMobileProvider>
+        </I18nProvider>
       </body>
     </html>
   );

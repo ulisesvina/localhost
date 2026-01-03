@@ -1,0 +1,68 @@
+{
+  "navigation": {
+    "about": "Acerca de",
+    "projects": "Proyectos",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "greeting": "Hola, soy Ulises 👋",
+    "description": "Creo experiencias digitales hermosas y funcionales con tecnologías modernas.",
+    "resumeButton": "Ver mi Currículum",
+    "word1": "DISTINTO",
+    "word2": "por",
+    "word3": "diseño"
+  },
+  "techStack": {
+    "label": "Tecnologías",
+    "skills": [
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "Diseño UI/UX",
+      "Diseño Responsivo"
+    ]
+  },
+  "about": {
+    "title": "Acerca de",
+    "subtitle": "Me especializo en crear experiencias digitales que fusionan un diseño impresionante con una ingeniería robusta.",
+    "cards": {
+      "interactive": {
+        "title": "Interactivo",
+        "description": "Priorizo el compromiso del usuario a través de interfaces intuitivas e interacciones fluidas."
+      },
+      "design": {
+        "title": "Diseño",
+        "description": "Mis diseños se centran en la claridad, la estética y los principios centrados en el usuario para crear experiencias memorables."
+      },
+      "responsiveness": {
+        "title": "Capacidad de Respuesta",
+        "description": "Me aseguro de que cada proyecto esté optimizado para el rendimiento y la accesibilidad en todos los dispositivos."
+      }
+    }
+  },
+  "projects": {
+    "title": "Proyectos",
+    "subtitle": "Una selección de trabajo que muestra mi enfoque del diseño y desarrollo.",
+    "projectDescription": "Experiencia web innovadora que combina excelencia en diseño con precisión técnica.",
+    "badges": {
+      "design": "Diseño",
+      "development": "Desarrollo"
+    }
+  },
+  "contact": {
+    "title": "Hablemos",
+    "subtitle": "¿Tienes una idea u oportunidad? Me encantaría saber de ti.",
+    "emailButton": "Enviar Correo",
+    "resumeButton": "Ver Currículum",
+    "findMeLabel": "O encuéntrame en",
+    "socials": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "twitter": "Twitter"
+    }
+  },
+  "mobileMenu": {
+    "languageToggle": "Idioma"
+  }
+}
