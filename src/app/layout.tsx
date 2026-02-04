@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Lora } from "next/font/google";
+import localFont from "next/font/local";
 import "@/style/globals.css";
 
 import IsMobileProvider from "@/context/ui/isMobile";
@@ -8,11 +8,46 @@ import I18nProvider from "@/i18n/provider";
 import Header from "@/components/Header";
 import MobileMenu from "@/components/mobileMenu";
 
+const Satoshi = localFont({
+  src: [
+    {
+      path: "../../public/fonts/Satoshi.ttf",
+    },
+    {
+      path: "../../public/fonts/Satoshi-Italic.ttf",
+      style: "italic",
+    }
+  ],
+  variable: "--font-satoshi",
+  display: "swap",
+});
 
-const lora = Lora({
-  variable: "--font-lora",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+const Merriweather = localFont({
+  src: [
+    {
+      path: "../../public/fonts/Merriweather.ttf",
+    },
+    {
+      path: "../../public/fonts/Merriweather-Italic.ttf",
+      style: "italic",
+    }
+  ],
+  variable: "--font-merriweather",
+  display: "swap",
+});
+
+const Fraunces = localFont({
+  src: [
+    {
+      path: "../../public/fonts/Fraunces.ttf",
+    },
+    {
+      path: "../../public/fonts/Fraunces-Italic.ttf",
+      style: "italic",
+    }
+  ],
+  variable: "--font-fraunces",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -28,7 +63,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${lora.variable} antialiased`}
+        className={`${Merriweather.variable} ${Satoshi.className} ${Fraunces.variable} antialiased`}
       >
         <I18nProvider>
           <IsMobileProvider>

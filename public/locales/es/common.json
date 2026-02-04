@@ -1,5 +1,6 @@
 {
   "navigation": {
+    "title": "Especialista en Productos Digitales",
     "about": "Acerca de",
     "projects": "Proyectos",
     "contact": "Contacto"
@@ -8,7 +9,7 @@
     "greeting": "Hola, soy Ulises 👋",
     "description": "Creo experiencias digitales hermosas y funcionales con tecnologías modernas.",
     "resumeButton": "Ver mi Currículum",
-    "word1": "DISTINTO",
+    "word1": "ÚNICO",
     "word2": "por",
     "word3": "diseño"
   },

@@ -23,12 +23,18 @@ const Header = () => {
 
     return (
         <header className={`${styles.headerDesktop} max-w-screen-md mx-auto flex justify-between items-center`}>
-            <Link href="/">
-                <span className="font-bold text-black text-2xl lora text-center">Ulises Viña</span>
+            <Link href="/" className="flex flex-col leading-tight">
+                <span className="font-bold text-black text-2xl classic">
+                    Ulises Viña
+                </span>
+                <span className="text-gray-600 text-xs tracking-wide">
+                    {t('navigation.title')}
+                </span>
             </Link>
+
             <nav>
                 <ul className={`${styles.navList} flex`}>
-                    {!isMobile && (
+                    {!isMobile && isClient && (
                         <>
                             <li><Link href="#about" className={styles.navLink}>{t('navigation.about')}</Link></li>
                             <li><Link href="#projects" className={styles.navLink}>{t('navigation.projects')}</Link></li>

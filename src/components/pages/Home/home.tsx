@@ -10,11 +10,16 @@ import { useTranslation } from "react-i18next"
 import { Atom, Brush, MonitorSmartphone, MoveRight } from "lucide-react"
 
 const Home = () => {
-  const { t } = useTranslation()
-  const words = [t("hero.word1"), t("hero.word2"), t("hero.word3")]
+  const { t, ready } = useTranslation()
+  const [words, setWords] = useState<string[]>(["DISTINCT", "by", "design"])
+  const [isClient, setIsClient] = useState(false)
   const displayProjectsCanonicalNames = ["chilangohacks", "protego247", "celuzen", "shelly"]
   const [displayedWords, setDisplayedWords] = useState<string[]>(["oabf3d", "a1", "nxj4#@%"])
   const [loaded, setLoaded] = useState<boolean[]>(() => Array(displayProjectsCanonicalNames.length).fill(false))
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
@@ -70,16 +75,25 @@ const Home = () => {
     })
   }, [displayProjectsCanonicalNames])
 
+  useEffect(() => {
+    setWords([
+      t("hero.word1"),
+      t("hero.word2"),
+      t("hero.word3"),
+    ])
+  }, [t])
+
 
   const boxStyles = ["min-w-[9ch]", "min-w-[3ch]", "min-w-[6ch]"]
 
+  const defaultSkills = ["React", "Next.js", "TypeScript", "Tailwind CSS", "UI/UX Design", "Responsive Design"]
   const skillBadges = [
-    { label: t("techStack.skills.0"), color: "bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300" },
-    { label: t("techStack.skills.1"), color: "bg-slate-50 text-slate-700 dark:bg-slate-950 dark:text-slate-300" },
-    { label: t("techStack.skills.2"), color: "bg-sky-50 text-sky-700 dark:bg-sky-950 dark:text-sky-300" },
-    { label: t("techStack.skills.3"), color: "bg-cyan-50 text-cyan-700 dark:bg-cyan-950 dark:text-cyan-300" },
-    { label: t("techStack.skills.4"), color: "bg-purple-50 text-purple-700 dark:bg-purple-950 dark:text-purple-300" },
-    { label: t("techStack.skills.5"), color: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300" },
+    { label: isClient && ready ? t("techStack.skills.0") : defaultSkills[0], color: "bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300" },
+    { label: isClient && ready ? t("techStack.skills.1") : defaultSkills[1], color: "bg-slate-50 text-slate-700 dark:bg-slate-950 dark:text-slate-300" },
+    { label: isClient && ready ? t("techStack.skills.2") : defaultSkills[2], color: "bg-sky-50 text-sky-700 dark:bg-sky-950 dark:text-sky-300" },
+    { label: isClient && ready ? t("techStack.skills.3") : defaultSkills[3], color: "bg-cyan-50 text-cyan-700 dark:bg-cyan-950 dark:text-cyan-300" },
+    { label: isClient && ready ? t("techStack.skills.4") : defaultSkills[4], color: "bg-purple-50 text-purple-700 dark:bg-purple-950 dark:text-purple-300" },
+    { label: isClient && ready ? t("techStack.skills.5") : defaultSkills[5], color: "bg-emerald-50 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300" },
   ]
 
   return (
@@ -88,9 +102,9 @@ const Home = () => {
       <main className="relative min-h-screen flex flex-col items-center justify-center gap-3 px-6 md:px-12 py-24 z-10">
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-6 text-center">
           <span
-            className={`${styles.word} ${boxStyles[0]} relative inline-block transform skew-x-6 border-4 border-cyan-500 bg-cyan-500 text-white px-6 py-3 shadow-xl`}
+            className={`${styles.word} ${boxStyles[0]} relative inline-block transform skew-x-6 border-4 border-cyan-500 bg-cyan-500 classic text-white px-6 py-3 shadow-xl`}
           >
-            <span className="-skew-x-6 block text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight lora not-italic">
+            <span className="-skew-x-6 block text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight italic">
               {displayedWords[0]}
             </span>
           </span>
@@ -100,7 +114,7 @@ const Home = () => {
             {displayedWords[1]}
           </span>
           <span
-            className={`${styles.word} ${boxStyles[2]} text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight lora dark:bg-white dark:text-black bg-gray-900 text-white px-6 py-3 shadow-xl`}
+            className={`${styles.word} ${boxStyles[2]} text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight fraunces md:tracking-wide dark:bg-white dark:text-black bg-gray-900 text-white px-6 py-3 shadow-xl`}
           >
             {displayedWords[2]}
           </span>
@@ -121,7 +135,6 @@ const Home = () => {
 
         <div className="relative z-10 max-w-7xl w-full">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Left: Image with decorative glow */}
             <div className="flex justify-center md:justify-start lg:justify-center">
               <div className="relative w-72 h-72 md:w-80 md:h-80">
                 <div
@@ -148,21 +161,21 @@ const Home = () => {
             <div className="flex flex-col space-y-10">
               <div className="space-y-3">
                 <h2 className="text-6xl md:text-7xl font-bold tracking-tight text-balance leading-tight">
-                  {t('hero.greeting')}
+                  {isClient && ready ? t('hero.greeting') : 'Hello, I\'m Ulises 👋'}
                 </h2>
                 <p className="text-lg md:text-xl text-foreground/75 dark:text-foreground/65 leading-relaxed max-w-md">
-                  {t('hero.description')}
+                  {isClient && ready ? t('hero.description') : 'I craft beautiful, functional digital experiences with modern technologies.'}
                 </p>
                 <a href="https://static.ulisesv.com/docs/Resume.pdf" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" size="lg" className="my-2 cursor-pointer">
-                    {t('hero.resumeButton')}
+                    {isClient && ready ? t('hero.resumeButton') : 'Check my Resume'}
                     <MoveRight className="ml-2 w-4 h-4" />
                   </Button>
                 </a>
               </div>
 
               <div className="space-y-4">
-                <h3 className="text-xs font-semibold text-foreground/50 uppercase tracking-widest">{t('techStack.label')}</h3>
+                <h3 className="text-xs font-semibold text-foreground/50 uppercase tracking-widest">{isClient && ready ? t('techStack.label') : 'Tech Stack'}</h3>
                 <div className="flex flex-wrap gap-2">
                   {skillBadges.map((skill, index) => (
                     <Badge
@@ -186,9 +199,9 @@ const Home = () => {
         <div className="max-w-4xl w-full">
           <div className="space-y-16">
             <div className="space-y-4">
-              <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-balance leading-tight">{t('about.title')}</h2>
+              <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-balance leading-tight">{isClient && ready ? t('about.title') : 'About'}</h2>
               <p className="text-xl md:text-2xl text-foreground/70 font-light max-w-2xl text-balance">
-                {t('about.subtitle')}
+                {isClient && ready ? t('about.subtitle') : 'I specialize in building digital experiences that merge stunning design with robust engineering.'}
               </p>
             </div>
 
@@ -198,9 +211,9 @@ const Home = () => {
               >
                 <h3 className="font-bold mb-1 uppercase text-sm text-gray-400 dark:text-gray-600 ">
                   <Atom className="inline-block mr-2 mb-1 w-4 h-4 text-cyan-400" />
-                  {t('about.cards.interactive.title')}</h3>
+                  {isClient && ready ? t('about.cards.interactive.title') : 'Interactive'}</h3>
                 <p className="text-foreground/70 leading-relaxed text-balance">
-                  {t('about.cards.interactive.description')}
+                  {isClient && ready ? t('about.cards.interactive.description') : 'I prioritize user engagement through intuitive interfaces and seamless interactions.'}
                 </p>
               </div>
               <div
@@ -208,9 +221,9 @@ const Home = () => {
               >
                 <h3 className="font-bold mb-1 uppercase text-sm text-gray-400 dark:text-gray-600 ">
                   <Brush className="inline-block mr-2 mb-1 w-4 h-4 text-cyan-400" />
-                  {t('about.cards.design.title')}</h3>
+                  {isClient && ready ? t('about.cards.design.title') : 'Design'}</h3>
                 <p className="text-foreground/70 leading-relaxed text-balance">
-                  {t('about.cards.design.description')}
+                  {isClient && ready ? t('about.cards.design.description') : 'My designs focus on clarity, aesthetics, and user-centric principles to create memorable experiences.'}
                 </p>
               </div>
               <div
@@ -218,9 +231,9 @@ const Home = () => {
               >
                 <h3 className="font-bold mb-1 uppercase text-sm text-gray-400 dark:text-gray-600 ">
                   <MonitorSmartphone className="inline-block mr-2 mb-1 w-4 h-4 text-cyan-400" />
-                  {t('about.cards.responsiveness.title')}</h3>
+                  {isClient && ready ? t('about.cards.responsiveness.title') : 'Responsiveness'}</h3>
                 <p className="text-foreground/70 leading-relaxed text-balance">
-                  {t('about.cards.responsiveness.description')}
+                  {isClient && ready ? t('about.cards.responsiveness.description') : 'I ensure that every project is optimized for performance and accessibility across all devices.'}
                 </p>
               </div>
             </div>
@@ -232,9 +245,9 @@ const Home = () => {
         <div className="max-w-6xl w-full">
           <div className="space-y-16">
             <div className="space-y-4">
-              <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-balance leading-tight">{t('projects.title')}</h2>
+              <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-balance leading-tight">{isClient && ready ? t('projects.title') : 'Projects'}</h2>
               <p className="text-xl md:text-2xl text-foreground/70 font-light text-balance">
-                {t('projects.subtitle')}
+                {isClient && ready ? t('projects.subtitle') : 'A selection of work that showcases my approach to design and development.'}
               </p>
             </div>
 
@@ -255,14 +268,14 @@ const Home = () => {
                   <div className="p-6 space-y-3">
                     <h3 className="text-2xl font-bold capitalize text-balance">{projectName}</h3>
                     <p className="text-foreground/70">
-                      {t('projects.projectDescription')}
+                      {isClient && ready ? t('projects.projectDescription') : 'Innovative web experience combining design excellence with technical precision.'}
                     </p>
                     <div className="pt-3 flex gap-2">
                       <Badge className="bg-cyan-100 text-cyan-800 dark:bg-cyan-950 dark:text-cyan-300 text-xs">
-                        {t('projects.badges.design')}
+                        {isClient && ready ? t('projects.badges.design') : 'Design'}
                       </Badge>
                       <Badge className="bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300 text-xs">
-                        {t('projects.badges.development')}
+                        {isClient && ready ? t('projects.badges.development') : 'Development'}
                       </Badge>
                     </div>
                   </div>
@@ -279,9 +292,9 @@ const Home = () => {
       >
         <div className="max-w-3xl w-full text-center space-y-12">
           <div className="space-y-4">
-            <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-balance leading-tight">{t('contact.title')}</h2>
+            <h2 className="text-5xl md:text-6xl font-bold tracking-tight text-balance leading-tight">{isClient && ready ? t('contact.title') : 'Let\'s Talk'}</h2>
             <p className="text-xl md:text-2xl text-foreground/70 font-light text-balance">
-              {t('contact.subtitle')}
+              {isClient && ready ? t('contact.subtitle') : 'Have an idea or opportunity? I\'d love to hear from you.'}
             </p>
           </div>
 
@@ -290,36 +303,36 @@ const Home = () => {
               href="mailto:your-email@example.com"
               className="px-10 py-4 bg-gradient-to-r from-cyan-500 to-blue-500 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200 text-center"
             >
-              {t('contact.emailButton')}
+              {isClient && ready ? t('contact.emailButton') : 'Send Email'}
             </a>
             <a
               href="#"
               className="px-10 py-4 border-2 border-foreground/20 text-foreground font-semibold rounded-lg hover:border-cyan-500/50 hover:bg-cyan-500/10 transition-all duration-200 text-center"
             >
-              {t('contact.resumeButton')}
+              {isClient && ready ? t('contact.resumeButton') : 'View Resume'}
             </a>
           </div>
 
           <div className="pt-8 space-y-6">
-            <p className="text-foreground/60 text-sm uppercase tracking-widest">{t('contact.findMeLabel')}</p>
+            <p className="text-foreground/60 text-sm uppercase tracking-widest">{isClient && ready ? t('contact.findMeLabel') : 'Or find me on'}</p>
             <div className="flex justify-center gap-6">
               <a
                 href="#"
                 className="text-foreground/70 hover:text-cyan-500 transition-colors duration-200 font-semibold hover:scale-110"
               >
-                {t('contact.socials.github')}
+                {isClient && ready ? t('contact.socials.github') : 'GitHub'}
               </a>
               <a
                 href="#"
                 className="text-foreground/70 hover:text-cyan-500 transition-colors duration-200 font-semibold hover:scale-110"
               >
-                {t('contact.socials.linkedin')}
+                {isClient && ready ? t('contact.socials.linkedin') : 'LinkedIn'}
               </a>
               <a
                 href="#"
                 className="text-foreground/70 hover:text-cyan-500 transition-colors duration-200 font-semibold hover:scale-110"
               >
-                {t('contact.socials.twitter')}
+                {isClient && ready ? t('contact.socials.twitter') : 'Twitter'}
               </a>
             </div>
           </div>
