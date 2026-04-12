@@ -1,0 +1,42 @@
+@font-face {
+	font-family: 'ClashDisplay';
+	src: url('/fonts/ClashDisplay.ttf') format('truetype');
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Satoshi';
+	src: url('/fonts/Satoshi.ttf') format('truetype');
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'JetBrainsMono';
+	src: url('/fonts/JetBrainsMono.ttf') format('truetype');
+	font-style: normal;
+	font-display: swap;
+}
+
+pre {
+	font-family: 'JetBrainsMono', monospace;
+	padding: 1rem;
+	background-color: #161616;
+	color: #fff;
+}
+
+pre::before {
+	content: '$';
+	margin-right: 1rem;
+	color: #00ff00;
+}
+
+.retro {
+	font-family: 'JetBrainsMono', monospace;
+}
+
+.flat {
+	font-family: 'Satoshi', sans-serif;
+	letter-spacing: -0.02em;
+}

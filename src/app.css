@@ -1,0 +1,17 @@
+@layer base, theme, component, utilities;
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+@import './lib/css/theme.css';
+
+:root {
+  font-size: 18px;
+  font-family: "ClashDisplay", sans-serif;
+  font-weight: 500;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  line-height: 1.6;
+  overflow-x: hidden;
+}

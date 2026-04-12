@@ -1,0 +1,33 @@
+@theme {
+  --color-background: oklch(0% 0 0);
+  --color-background-muted: oklch(28.485% 0.03757 224.769);
+  --color-surface: oklch(0.26 0.03 215);
+  --color-surface-elevated: oklch(0.30 0.035 210);
+
+  --color-foreground: oklch(0.95 0.015 210);
+  --color-foreground-muted: oklch(0.75 0.02 210);
+  --color-foreground-subtle: oklch(0.60 0.02 210);
+  --color-border: oklch(0.35 0.03 210);
+
+  --color-primary: oklch(0.70 0.14 195);
+  --color-primary-hover: oklch(0.75 0.15 195);
+  --color-primary-active: oklch(0.65 0.16 195);
+  --color-primary-foreground: oklch(0.18 0.02 220);
+
+  --color-secondary: oklch(0.65 0.11 205);
+  --color-secondary-hover: oklch(0.70 0.12 205);
+  --color-secondary-foreground: oklch(0.18 0.02 220);
+
+  --color-accent: oklch(0.72 0.16 215);
+  --color-accent-hover: oklch(0.77 0.17 215);
+  --color-accent-foreground: oklch(0.18 0.02 225);
+
+  --color-brand-strong: oklch(0.68 0.18 225);
+  --color-brand-strong-hover: oklch(0.73 0.19 225);
+  --color-brand-strong-foreground: oklch(0.16 0.02 230);
+
+  --color-success: oklch(0.72 0.17 160);
+  --color-warning: oklch(0.82 0.16 85);
+  --color-danger: oklch(0.70 0.20 25);
+}
+
