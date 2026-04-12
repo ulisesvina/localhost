@@ -150,6 +150,15 @@
 		in:fly={{ x: 320, duration: 300 }}
 		out:fly={{ x: 320, duration: 300 }}
 	>
+		<button
+			type="button"
+			onclick={closeMobileMenu}
+			class="absolute top-5 right-5 grid h-9 w-9 place-items-center rounded-md text-foreground-muted transition-colors duration-200 hover:bg-white/10 hover:text-foreground"
+			aria-label={copy.closeMenu}
+		>
+			<Icon icon="lucide:x" width="20" height="20" />
+		</button>
+
 		<ul class="mt-14 flex flex-col gap-5">
 			<li>
 				<div class="inline-flex items-center gap-2 rounded-full border border-border bg-black/30 p-1">

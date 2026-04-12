@@ -31,3 +31,6 @@
   --color-danger: oklch(0.70 0.20 25);
 }
 
+* {
+  overflow-anchor: none;
+}
