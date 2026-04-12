@@ -50,7 +50,7 @@
 
 <header
 	in:fly={{ y: -20, duration: 300 }}
-	class="fixed top-0 left-0 z-50 w-full transition-all duration-300 ease-in-out {isAtTop
+	class="sticky top-0 left-0 z-50 w-full transition-all duration-300 ease-in-out {isAtTop
 		? 'bg-transparent py-2'
 		: 'border-b border-border bg-black/90 py-1 backdrop-blur-sm'}"
 >
@@ -137,7 +137,7 @@
 {#if mobileMenuOpen && isMobile}
 	<button
 		type="button"
-		class="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden"
+		class="sticky inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden"
 		onclick={closeMobileMenu}
 		in:fade={{ duration: 200 }}
 		out:fade={{ duration: 200 }}
