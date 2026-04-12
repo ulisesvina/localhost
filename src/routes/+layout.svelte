@@ -29,13 +29,22 @@
 		localeStore.set(data.locale ?? defaultLocale);
 	});
 
+	const setVpHeight = () => {
+		const vh = window.innerHeight * 0.01;
+		document.documentElement.style.setProperty('--vh', `${vh}px`);
+	};
+
 	onMount(() => {
 		const browserLocale = detectLocaleFromNavigator();
 		if (browserLocale !== get(localeStore)) {
 			localeStore.set(browserLocale);
 		}
+
+    setVpHeight();
 	});
 </script>
+
+<svelte:window on:orientationchange={setVpHeight} on:resize={setVpHeight} />
 
 <svelte:head>
 	<html lang={$localeStore}></html>
@@ -56,6 +65,6 @@
 	.layout {
 		display: flex;
 		flex-direction: column;
-		min-height: 100vh;
+		min-height: 100svh;
 	}
 </style>
