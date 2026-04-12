@@ -34,24 +34,42 @@
 			{copy.subtitle}
 		</h2>
 
-		<div class="flex flex-col gap-4 text-sm md:flex-row">
-			<a
-				href="#contact"
-				class="text-foreground-muted transition-colors duration-200 hover:text-foreground"
-				><Button variant="primary">{copy.contactCta} <Icon icon="heroicons-outline:mail" /></Button>
-			</a>
-			<a
-				href="#resume"
-				class="text-foreground-muted transition-colors duration-200 hover:text-foreground"
-			>
-				<Button variant="secondary">{copy.resumeCta} <Icon icon="heroicons:arrow-right" /></Button>
-			</a>
-		</div>
+		<ul
+			class="intro-enter intro-enter-cta flex w-full flex-col items-center gap-3 pt-6 sm:flex-row sm:justify-center sm:gap-4"
+		>
+			<li class="w-full max-w-65 sm:w-auto sm:max-w-none">
+				<a
+					href="#contact"
+					class="block w-full text-foreground-muted transition-colors duration-200 hover:text-foreground"
+				>
+					<Button
+						variant="primary"
+						class="flex w-full items-center justify-center gap-2 py-2 px-5 text-[0.95rem] sm:py-2.5 sm:px-6 sm:text-base"
+					>
+						{copy.contactCta}
+						<Icon icon="heroicons-outline:mail" />
+					</Button>
+				</a>
+			</li>
+			<li class="w-full max-w-65 sm:w-auto sm:max-w-none">
+				<a
+					href="#resume"
+					class="block w-full text-foreground-muted transition-colors duration-200 hover:text-foreground"
+				>
+					<Button
+						variant="secondary"
+						class="flex w-full items-center justify-center gap-2 py-2 px-5 text-[0.95rem] sm:py-2.5 sm:px-6 sm:text-base"
+					>
+						{copy.resumeCta}
+						<Icon icon="heroicons:arrow-right" />
+					</Button>
+				</a>
+			</li>
+		</ul>
 
 		<div class="intro-enter intro-enter-subheading mx-auto mt-4 h-px w-12 bg-border"></div>
 	</div>
 </section>
-
 <style>
 	.hero-shell {
 		width: 100%;

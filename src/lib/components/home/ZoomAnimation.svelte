@@ -1,20 +1,35 @@
 <script lang="ts">
 	import { translations, useLocaleContext } from '$lib/i18n';
+	import { onMount } from 'svelte';
 
-	let container: any = $state(null);
+	let container: HTMLElement | null = $state(null);
 	let scrollY = $state(0);
 	let innerHeight = $state(0);
+	let containerTop = $state(0);
+	let containerHeight = $state(0);
+
 	const locale = useLocaleContext();
 	const copy = $derived(translations[$locale].scroll);
 
+	// Update dimensions only when they change, not on every scroll
+	onMount(() => {
+		const updateRects = () => {
+			if (container) {
+				containerTop = container.offsetTop;
+				containerHeight = container.offsetHeight;
+			}
+		};
+		updateRects();
+		window.addEventListener('resize', updateRects);
+		return () => window.removeEventListener('resize', updateRects);
+	});
+
 	const progress = $derived(
-		container
-			? Math.max(
-					0,
-					Math.min(1, (scrollY - container.offsetTop) / (container.offsetHeight - innerHeight))
-				)
+		containerHeight > 0
+			? Math.max(0, Math.min(1, (scrollY - containerTop) / (containerHeight - innerHeight)))
 			: 0
 	);
+
 	const scale = $derived(Math.max(1, 2.5 - progress * 3));
 	const opacity = $derived(Math.min(1, progress * 5));
 	const isSettled = $derived(scale <= 1);
@@ -25,7 +40,7 @@
 <div class="scroll-container" bind:this={container} aria-label={copy.ariaLabel}>
 	<div class="scroll-container-background" aria-hidden="true"></div>
 	<div class="sticky-content">
-		<div class="text-wrapper" style:transform="scale({scale})" style:opacity>
+		<div class="text-wrapper" style:transform="scale({scale}) translateZ(0)" style:opacity>
 			<h1
 				class="main-title line-clamp-3 px-20 text-5xl md:text-8xl"
 				class:gradient-live={isSettled}
@@ -79,12 +94,13 @@
 	.text-wrapper {
 		text-align: center;
 		will-change: transform, opacity;
-		transition: transform 0.1s ease-out;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		gap: 1.25rem;
 		width: min(78rem, 94vw);
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
 	}
 
 	.main-title {
