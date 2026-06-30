@@ -113,7 +113,7 @@ export const translations = {
 			},
 			education: {
 				school: 'Universidad Nacional Autónoma de México (UNAM)',
-				degree: 'B.S. in Mathematics - Focus on Machine Learning / Algorithms',
+				degree: 'B.S. in Computer Science',
 				date: 'Expected 2029',
 				location: 'Mexico City, MX'
 			},
@@ -257,7 +257,7 @@ export const translations = {
 			},
 			education: {
 				school: 'Universidad Nacional Autónoma de México (UNAM)',
-				degree: 'Licenciatura en Matemáticas - Enfoque en Machine Learning/Inteligencia Artificial',
+				degree: 'Licenciatura en Ciencias de la Computación',
 				date: 'Estimado para 2029',
 				location: 'Ciudad de México, MX'
 			},
